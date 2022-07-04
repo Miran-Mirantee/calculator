@@ -78,4 +78,14 @@ addBtn.addEventListener('click', () => {
         console.log(`something was here`);
         operator = add;
     }
+    else if (num1Rdy && num2Rdy) {
+        num2 = parseInt(temp.join(''));
+        temp = [];
+        console.log(`num2: ${num2}`);
+        result = operate(num1, num2, operator);
+        console.log(result);
+        showDisplay(result);
+        num1 = result;
+        num2Rdy = false;
+    }
 });
