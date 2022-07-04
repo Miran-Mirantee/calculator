@@ -152,3 +152,12 @@ divideBtn.addEventListener('click', () => {
         operator = divide;
     }
 });
+
+const clearBtn = document.querySelector('.clear');
+clearBtn.addEventListener('click', () => {
+    num1 = undefined;
+    num2 = undefined;
+    num1Rdy = false;
+    num2Rdy = false;
+    showDisplay('');
+});
