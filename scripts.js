@@ -54,9 +54,7 @@ equalBtn.addEventListener('click', () => {
     if (num1Rdy && num2Rdy) {
         num2 = parseInt(temp.join(''));
         temp = [];
-        console.log(`num2: ${num2}`);
         result = operate(num1, num2, operator);
-        console.log(result);
         showDisplay(result);
         num1 = result;
         num2Rdy = false;
@@ -69,21 +67,38 @@ const addBtn = document.querySelector('.add');
 addBtn.addEventListener('click', () => {
     if (!num1Rdy) {
         temp = [];
-        // console.log(`num1: ${num1}`);;
         operator = add;
         num1Rdy = true;
     }
     else if (num1Rdy && !num2Rdy) {
-        // console.log(`num2: ${num2}`);
-        console.log(`something was here`);
         operator = add;
     }
     else if (num1Rdy && num2Rdy) {
         num2 = parseInt(temp.join(''));
         temp = [];
-        console.log(`num2: ${num2}`);
         result = operate(num1, num2, operator);
-        console.log(result);
+        operator = add;
+        showDisplay(result);
+        num1 = result;
+        num2Rdy = false;
+    }
+}); 
+
+const subtractBtn = document.querySelector('.subtract');
+subtractBtn.addEventListener('click', () => {
+    if (!num1Rdy) {
+        temp = [];
+        operator = subtract;
+        num1Rdy = true;
+    }
+    else if (num1Rdy && !num2Rdy) {
+        operator = subtract;
+    }
+    else if (num1Rdy && num2Rdy) {
+        num2 = parseInt(temp.join(''));
+        temp = [];
+        result = operate(num1, num2, operator);
+        operator = subtract;
         showDisplay(result);
         num1 = result;
         num2Rdy = false;
