@@ -40,7 +40,12 @@ function divide(num1, num2) {
 }
 
 function operate(num1, num2, operator) {
-    return operator(num1, num2);
+    num2 = parseInt(temp.join(''));
+    temp = [];
+    let result = operator(num1, num2);
+    showDisplay(result);
+    num2Rdy = false;
+    return result;
 }
 
 function showDisplay(num) {
@@ -52,12 +57,7 @@ function showDisplay(num) {
 const equalBtn = document.querySelector('.equal');
 equalBtn.addEventListener('click', () => {
     if (num1Rdy && num2Rdy) {
-        num2 = parseInt(temp.join(''));
-        temp = [];
-        result = operate(num1, num2, operator);
-        showDisplay(result);
-        num1 = result;
-        num2Rdy = false;
+        num1 = operate(num1, num2, operator);
     }
     else
         console.log(`enter num2 first`)
@@ -74,13 +74,8 @@ addBtn.addEventListener('click', () => {
         operator = add;
     }
     else if (num1Rdy && num2Rdy) {
-        num2 = parseInt(temp.join(''));
-        temp = [];
-        result = operate(num1, num2, operator);
+        num1 = operate(num1, num2, operator);
         operator = add;
-        showDisplay(result);
-        num1 = result;
-        num2Rdy = false;
     }
 }); 
 
@@ -95,12 +90,7 @@ subtractBtn.addEventListener('click', () => {
         operator = subtract;
     }
     else if (num1Rdy && num2Rdy) {
-        num2 = parseInt(temp.join(''));
-        temp = [];
-        result = operate(num1, num2, operator);
+        num1 = operate(num1, num2, operator);
         operator = subtract;
-        showDisplay(result);
-        num1 = result;
-        num2Rdy = false;
     }
 });
