@@ -6,23 +6,6 @@ let num2Rdy = false;
 let operator;
 let result;
 
-const numbers = document.querySelectorAll('.btn.number');
-for (const number of numbers) {
-    number.addEventListener('click', () => {
-        if (!num1Rdy) {
-            temp.push(number.textContent);
-            num1 = parseInt(temp.join(''));
-            showDisplay(parseInt(temp.join('')));
-        }
-        if (num1Rdy) {
-            temp.push(number.textContent);
-            num2 = parseInt(temp.join(''));
-            num2Rdy = true;
-            showDisplay(parseInt(temp.join('')));
-        }
-    });
-}
-
 function add(num1, num2) {
     return num1 + num2;
 }
@@ -155,9 +138,54 @@ divideBtn.addEventListener('click', () => {
 
 const clearBtn = document.querySelector('.clear');
 clearBtn.addEventListener('click', () => {
+    // Reset everything
     num1 = undefined;
     num2 = undefined;
     num1Rdy = false;
     num2Rdy = false;
     showDisplay('');
 });
+
+const backspaceBtn = document.querySelector('.backspace');
+backspaceBtn.addEventListener('click', () => {
+    // check if number#1 is ready or not
+    if (!num1Rdy) {
+        temp.pop();
+        num1 = parseInt(temp.join(''));
+        if (!num1)
+            showDisplay('');
+        else
+            showDisplay(num1);
+    }
+    // check if number#1 is ready then backspace number#2 instead
+    if (num1Rdy) {
+        temp.pop();
+        num2 = parseInt(temp.join(''));
+        num2Rdy = true;
+        if (!num2) {
+            showDisplay('');
+            num2Rdy = false;
+        }
+        else
+            showDisplay(num2);
+    }
+});
+
+const numbers = document.querySelectorAll('.number');
+for (const number of numbers) {
+    number.addEventListener('click', () => {
+        // check if number#1 is ready or not
+        if (!num1Rdy) {
+            temp.push(number.textContent);
+            num1 = parseInt(temp.join(''));
+            showDisplay(parseInt(temp.join('')));
+        }
+        // check if number#1 is ready then assign input into number#2 instead
+        if (num1Rdy) {
+            temp.push(number.textContent);
+            num2 = parseInt(temp.join(''));
+            num2Rdy = true;
+            showDisplay(parseInt(temp.join('')));
+        }
+    });
+}
