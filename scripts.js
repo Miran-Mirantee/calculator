@@ -76,7 +76,7 @@ equalBtn.addEventListener('click', () => {
 const addBtn = document.querySelector('.add');
 addBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as add and ready number#1
-    if (!num1Rdy) {
+    if (!num1Rdy && num1) {
         temp = [];
         operator = add;
         num1Rdy = true;
@@ -96,7 +96,7 @@ addBtn.addEventListener('click', () => {
 const subtractBtn = document.querySelector('.subtract');
 subtractBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as subtract and ready number#1
-    if (!num1Rdy) {
+    if (!num1Rdy && num1) {
         temp = [];
         operator = subtract;
         num1Rdy = true;
@@ -116,7 +116,7 @@ subtractBtn.addEventListener('click', () => {
 const multiplyBtn = document.querySelector('.multiply');
 multiplyBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as multiply and ready number#1
-    if (!num1Rdy) {
+    if (!num1Rdy && num1) {
         temp = [];
         operator = multiply;
         num1Rdy = true;
@@ -136,7 +136,7 @@ multiplyBtn.addEventListener('click', () => {
 const divideBtn = document.querySelector('.divide');
 divideBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as divide and ready number#1
-    if (!num1Rdy) {
+    if (!num1Rdy && num1) {
         temp = [];
         operator = divide;
         num1Rdy = true;
