@@ -4,6 +4,7 @@ let temp = [];
 let num1Rdy = false;
 let num2Rdy = false;
 let negateOn = false;
+let dotUsed = false;
 let operator;
 
 function negate(num) {
@@ -26,12 +27,14 @@ function divide(num1, num2) {
     return num1 / num2;
 }
 
+// reset the calculator
 function reset() {
     num1 = undefined;
     num2 = undefined;
     num1Rdy = false;
     num2Rdy = false;
     negateOn = false;
+    dotUsed = false;
     temp = [];
     showDisplay('');
 }
@@ -76,6 +79,10 @@ negateBtn.addEventListener('click', () => {
     if (!num1Rdy && num1) {
         num1 = negate(num1);
         negateOn = true;
+        showDisplay(num1);
+    }
+    else if (num1Rdy && !num2Rdy) {
+        num1 = negate(num1);
         showDisplay(num1);
     }
     else if (num1Rdy && num2Rdy) {
@@ -173,6 +180,15 @@ divideBtn.addEventListener('click', () => {
     }
 });
 
+const dotBtn = document.querySelector('.dot');
+dotBtn.addEventListener('click', () => {
+    if (!dotUsed) {
+        temp.push(dotBtn.textContent);
+        showDisplay(temp.join(''));
+    }
+    dotUsed = true;
+});
+
 const clearBtn = document.querySelector('.clear');
 clearBtn.addEventListener('click', () => {
     // Reset everything
@@ -184,27 +200,27 @@ backspaceBtn.addEventListener('click', () => {
     // check if number#1 is ready or not
     if (!num1Rdy) {
         temp.pop();
-        num1 = parseInt(temp.join(''));
+        num1 = parseFloat(temp.join(''));
         if (negateOn)
             num1 = negate(num1);
         if (!num1)
-            showDisplay('');
+            showDisplay(temp.join(''));
         else
-            showDisplay(num1);
+            showDisplay(temp.join(''));
     }
     // check if number#1 is ready then backspace number#2 instead
     if (num1Rdy) {
         temp.pop();
-        num2 = parseInt(temp.join(''));
+        num2 = parseFloat(temp.join(''));
         num2Rdy = true;
         if (negateOn)
             num2 = negate(num2);
         if (!num2) {
-            showDisplay('');
+            showDisplay(temp.join(''));
             num2Rdy = false;
         }
         else
-            showDisplay(num2);
+            showDisplay(temp.join(''));
     }
 });
 
@@ -214,19 +230,19 @@ for (const number of numbers) {
         // check if number#1 is ready or not
         if (!num1Rdy) {
             temp.push(number.textContent);
-            num1 = parseInt(temp.join(''));
+            num1 = parseFloat(temp.join(''));
             if (negateOn)
                 num1 = negate(num1);
-            showDisplay(num1);
+            showDisplay(temp.join(''));
         }
         // check if number#1 is ready then assign input into number#2 instead
         if (num1Rdy) {
             temp.push(number.textContent);
-            num2 = parseInt(temp.join(''));
+            num2 = parseFloat(temp.join(''));
             num2Rdy = true;
             if (negateOn)
                 num2 = negate(num2);
-            showDisplay(num2);
+            showDisplay(temp.join(''));
         }
     });
 }
