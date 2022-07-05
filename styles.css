@@ -54,11 +54,11 @@ body {
 }
 
 .backspace {
-    background-color: orange;
+    background-color: #e36800;
 }
 
 .equal {
-    background-color: #00ff89;
+    background-color: #06bd68;
 }
 
 .operator {
