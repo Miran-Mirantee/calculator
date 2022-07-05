@@ -31,6 +31,22 @@ body {
 
 .btn {
     height: 100px;
-    width: auto;
+    /* width: 200px; */
     font-size: 24px;
+}
+
+.number {
+    background-color: green;
+}
+
+.clear {
+    background-color: red;
+}
+
+.backspace {
+    background-color: orange;
+}
+
+.equal {
+    background-color: cyan;
 }

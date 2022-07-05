@@ -4,7 +4,10 @@ let temp = [];
 let num1Rdy = false;
 let num2Rdy = false;
 let operator;
-let result;
+
+function negate(num) {
+    return num * -1;
+}
 
 function add(num1, num2) {
     return num1 + num2;
@@ -55,6 +58,11 @@ equalBtn.addEventListener('click', () => {
     else
         console.log(`enter num2 first`)
 });
+
+const negateBtn = document.querySelector('.negate');
+negateBtn.addEventListener('click', () => [
+
+]);
 
 const addBtn = document.querySelector('.add');
 addBtn.addEventListener('click', () => {
@@ -143,6 +151,7 @@ clearBtn.addEventListener('click', () => {
     num2 = undefined;
     num1Rdy = false;
     num2Rdy = false;
+    temp = [];
     showDisplay('');
 });
 
