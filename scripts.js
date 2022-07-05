@@ -78,15 +78,22 @@ function getNum(num) {
         if (temp[0] != 0 || num != 0 && !dotUsed) {
             temp.push(num);
             let result = parseFloat(temp.join(''));
-            if (negateOn)
+            if (negateOn) {
                 result = negate(result);
-            showDisplay(temp.join(''));
+                showDisplay(`-${temp.join('')}`);
+            }
+            else {
+                showDisplay(temp.join(''));
+            }
             return result;
         }
     }
     else {
         let result = parseFloat(temp.join(''));
-        return result;
+        if (negateOn) 
+            return negate(result);
+        else
+            return result;
     }
 }
 
@@ -111,7 +118,7 @@ const negateBtn = document.querySelector('.negate');
 negateBtn.addEventListener('click', () => {
     if (!num1Rdy && num1) {
         num1 = negate(num1);
-        negateOn = true;
+        negateOn = !negateOn;
         showDisplay(num1);
     }
     else if (num1Rdy && !num2Rdy) {
@@ -120,7 +127,7 @@ negateBtn.addEventListener('click', () => {
     }
     else if (num1Rdy && num2Rdy) {
         num2 = negate(num2);
-        negateOn = true;
+        negateOn = !negateOn;
         showDisplay(num2);
     }
 });
@@ -236,12 +243,16 @@ backspaceBtn.addEventListener('click', () => {
             dotUsed = false;
         }
         num1 = parseFloat(temp.join(''));
-        if (negateOn)
+        if (negateOn) {
             num1 = negate(num1);
-        if (!num1)
-            showDisplay(temp.join(''));
-        else
-            showDisplay(temp.join(''));
+            showDisplay(`-${temp.join('')}`);
+        }
+        else {
+            if (!num1)
+                showDisplay(temp.join(''));
+            else
+                showDisplay(temp.join(''));
+        }
     }
     // check if number#1 and #2 is ready and has value on num2 
     // then backspace number#2 
@@ -252,14 +263,18 @@ backspaceBtn.addEventListener('click', () => {
         }
         num2 = parseFloat(temp.join(''));
         num2Rdy = true;
-        if (negateOn)
+        if (negateOn) {
             num2 = negate(num2);
-        if (!num2) {
-            showDisplay(temp.join(''));
-            num2Rdy = false;
+            showDisplay(`-${temp.join('')}`);
         }
-        else
-            showDisplay(temp.join(''));
+        else {
+            if (!num2) {
+                showDisplay(temp.join(''));
+                num2Rdy = false;
+            }
+            else
+                showDisplay(temp.join(''));
+        }
     }
 });
 
