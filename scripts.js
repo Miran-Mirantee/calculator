@@ -236,8 +236,10 @@ backspaceBtn.addEventListener('click', () => {
         else
             showDisplay(temp.join(''));
     }
-    // check if number#1 is ready then backspace number#2 instead
-    if (num1Rdy) {
+    // check if number#1 and #2 is ready and has value on num2 
+    // then backspace number#2 
+    // to prevent user from backspace the result
+    if (num1Rdy && num2Rdy && num2) {
         if (temp.pop() === '.') {
             dotUsed = false;
         }
