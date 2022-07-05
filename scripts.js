@@ -73,13 +73,19 @@ function rdyForNum2() {
 // Get number from buttons
 // num = number on the button
 function getNum(num) {
-    // preventing the user from entering multiple 0 before decimal
-    if (temp[0] != 0 || num != 0 || dotUsed) {
-        temp.push(num);
+    if (temp.length <= 15) {
+        // preventing the user from entering multiple 0 before decimal
+        if (temp[0] != 0 || num != 0 && !dotUsed) {
+            temp.push(num);
+            let result = parseFloat(temp.join(''));
+            if (negateOn)
+                result = negate(result);
+            showDisplay(temp.join(''));
+            return result;
+        }
+    }
+    else {
         let result = parseFloat(temp.join(''));
-        if (negateOn)
-            result = negate(result);
-        showDisplay(temp.join(''));
         return result;
     }
 }
@@ -209,7 +215,7 @@ divideBtn.addEventListener('click', () => {
 
 const dotBtn = document.querySelector('.dot');
 dotBtn.addEventListener('click', () => {
-    if (!dotUsed) {
+    if (!dotUsed && temp.length <= 15) {
         temp.push(dotBtn.textContent);
         showDisplay(temp.join(''));
     }
@@ -257,7 +263,7 @@ backspaceBtn.addEventListener('click', () => {
     }
 });
 
-const numbers = document.querySelectorAll('.number');
+const numbers = document.querySelectorAll('.operand');
 for (const number of numbers) {
     number.addEventListener('click', () => {
         // check if number#1 is ready or not

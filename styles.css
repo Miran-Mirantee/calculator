@@ -5,38 +5,48 @@ body {
 
 .frame {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 800px;
     width: 600px;
     margin: 24px;
 }
 
 .display {
-    font-size: 48px;
-    /* align-self: flex-end; */
+    font-size: 64px;
+    text-align: end;
+    height: 100px;
+    background-color: #a2af77;
 }
 
-.btn-panel {
+.container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* height: 400px; */
-    /* width: 500px; */
     gap: 5px;
+    background-color: #2b2a2d;
+    padding: 45px 20px;
+    border-radius: 16px;
 }
 
 .grid-column-span-2 {
     grid-column: span 2;
 }
 
-.btn {
-    height: 100px;
-    /* width: 200px; */
-    font-size: 24px;
+.grid-column-span-4 {
+    grid-column: span 4;
 }
 
-.number {
-    background-color: green;
+.btn {
+    height: 100px;
+    padding: 20px;
+    font-size: 36px;
+    border-radius: 6px;
+    color: white;
+}
+
+.operand,
+.dot {
+    background-color: #58595b;
 }
 
 .clear {
@@ -48,5 +58,9 @@ body {
 }
 
 .equal {
-    background-color: cyan;
+    background-color: #00ff89;
+}
+
+.operator {
+    background-color: #0070bf;
 }
