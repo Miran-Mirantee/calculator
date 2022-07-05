@@ -62,6 +62,13 @@ function showDisplay(num) {
     display.textContent = num;
 }
 
+// clear temp for number#2
+function rdyForNum2() {
+    temp = [];
+    num1Rdy = true;
+    negateOn = false;
+    dotUsed = false;
+}
 
 const equalBtn = document.querySelector('.equal');
 equalBtn.addEventListener('click', () => {
@@ -96,21 +103,21 @@ const addBtn = document.querySelector('.add');
 addBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as add and ready number#1
     if (!num1Rdy && num1) {
-        temp = [];
+        rdyForNum2();
         operator = add;
-        num1Rdy = true;
-        negateOn = false;
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as add
     // in case the user want to change the operator 
     else if (num1Rdy && !num2Rdy) {
         operator = add;
+        dotUsed = false;
     }
     // check if the number#1 and number#2 is ready to calculate then calculate using 
     // the previous operator and assign new operator as add
     else if (num1Rdy && num2Rdy) {
         num1 = operate(num1, num2, operator);
         operator = add;
+        dotUsed = false;
     }
 }); 
 
@@ -118,21 +125,21 @@ const subtractBtn = document.querySelector('.subtract');
 subtractBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as subtract and ready number#1
     if (!num1Rdy && num1) {
-        temp = [];
+        rdyForNum2();
         operator = subtract;
-        num1Rdy = true;
-        negateOn = false;
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as subtract
     // in case the user want to change the operator 
     else if (num1Rdy && !num2Rdy) {
         operator = subtract;
+        dotUsed = false;
     }
     // check if the number#1 and number#2 is ready to calculate then calculate using 
     // the previous operator and assign new operator as subtract
     else if (num1Rdy && num2Rdy) {
         num1 = operate(num1, num2, operator);
         operator = subtract;
+        dotUsed = false;
     }
 });
 
@@ -140,21 +147,21 @@ const multiplyBtn = document.querySelector('.multiply');
 multiplyBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as multiply and ready number#1
     if (!num1Rdy && num1) {
-        temp = [];
+        rdyForNum2();
         operator = multiply;
-        num1Rdy = true;
-        negateOn = false;
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as multiply
     // in case the user want to change the operator 
     else if (num1Rdy && !num2Rdy) {
         operator = multiply;
+        dotUsed = false;
     }
     // check if the number#1 and number#2 is ready to calculate then calculate using 
     // the previous operator and assign new operator as multiply
     else if (num1Rdy && num2Rdy) {
         num1 = operate(num1, num2, operator);
         operator = multiply;
+        dotUsed = false;
     }
 });
 
@@ -162,21 +169,21 @@ const divideBtn = document.querySelector('.divide');
 divideBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as divide and ready number#1
     if (!num1Rdy && num1) {
-        temp = [];
+        rdyForNum2();
         operator = divide;
-        num1Rdy = true;
-        negateOn = false;
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as divide
     // in case the user want to change the operator 
     else if (num1Rdy && !num2Rdy) {
         operator = divide;
+        dotUsed = false;
     }
     // check if the number#1 and number#2 is ready to calculate then calculate using 
     // the previous operator and assign new operator as divide
     else if (num1Rdy && num2Rdy) {
         num1 = operate(num1, num2, operator);
         operator = divide;
+        dotUsed = false;
     }
 });
 
@@ -199,7 +206,9 @@ const backspaceBtn = document.querySelector('.backspace');
 backspaceBtn.addEventListener('click', () => {
     // check if number#1 is ready or not
     if (!num1Rdy) {
-        temp.pop();
+        if (temp.pop() === '.') {
+            dotUsed = false;
+        }
         num1 = parseFloat(temp.join(''));
         if (negateOn)
             num1 = negate(num1);
@@ -210,7 +219,9 @@ backspaceBtn.addEventListener('click', () => {
     }
     // check if number#1 is ready then backspace number#2 instead
     if (num1Rdy) {
-        temp.pop();
+        if (temp.pop() === '.') {
+            dotUsed = false;
+        }
         num2 = parseFloat(temp.join(''));
         num2Rdy = true;
         if (negateOn)
