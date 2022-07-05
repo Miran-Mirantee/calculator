@@ -70,6 +70,17 @@ function rdyForNum2() {
     dotUsed = false;
 }
 
+// Get number from buttons
+// num = number on the button
+function getNum(num) {
+    temp.push(num);
+    let result = parseFloat(temp.join(''));
+    if (negateOn)
+        result = negate(result);
+    showDisplay(temp.join(''));
+    return result;
+}
+
 const equalBtn = document.querySelector('.equal');
 equalBtn.addEventListener('click', () => {
     // check if the number#1 and number#2 is ready to calculate then calculate
@@ -240,20 +251,12 @@ for (const number of numbers) {
     number.addEventListener('click', () => {
         // check if number#1 is ready or not
         if (!num1Rdy) {
-            temp.push(number.textContent);
-            num1 = parseFloat(temp.join(''));
-            if (negateOn)
-                num1 = negate(num1);
-            showDisplay(temp.join(''));
+            num1 = getNum(number.textContent);
         }
         // check if number#1 is ready then assign input into number#2 instead
         if (num1Rdy) {
-            temp.push(number.textContent);
-            num2 = parseFloat(temp.join(''));
+            num2 = getNum(number.textContent);
             num2Rdy = true;
-            if (negateOn)
-                num2 = negate(num2);
-            showDisplay(temp.join(''));
         }
     });
 }
