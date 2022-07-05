@@ -50,7 +50,7 @@ function operate(num1, num2, operator) {
     }
     temp = [];
     let result = operator(num1, num2);
-    showDisplay(result);
+    showDisplay(toFixed(result, 8));
     num2Rdy = false;
     return result;
 }
@@ -73,12 +73,20 @@ function rdyForNum2() {
 // Get number from buttons
 // num = number on the button
 function getNum(num) {
-    temp.push(num);
-    let result = parseFloat(temp.join(''));
-    if (negateOn)
-        result = negate(result);
-    showDisplay(temp.join(''));
-    return result;
+    // preventing the user from entering multiple 0 before decimal
+    if (temp[0] != 0 || num != 0 || dotUsed) {
+        temp.push(num);
+        let result = parseFloat(temp.join(''));
+        if (negateOn)
+            result = negate(result);
+        showDisplay(temp.join(''));
+        return result;
+    }
+}
+
+function toFixed(value, precision) {
+    var power = Math.pow(10, precision || 0);
+    return String(Math.round(value * power) / power);
 }
 
 const equalBtn = document.querySelector('.equal');
