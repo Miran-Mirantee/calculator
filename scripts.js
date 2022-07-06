@@ -66,15 +66,21 @@ function showDisplay(num) {
         display.textContent = num;
         return;
     }
-    let numToDisplay = toFixed(num, 7);
+    // in case num is a "-", display nothing and set negateOn to false
+    if (num === '-') {
+        display.textContent = ``;
+        negateOn = false;
+        return;
+    }
     // in case num is a "blank" number, display nothing
-    if (num === "") {
+    if (num === '') {
         display.textContent = ``;
         return;
     }
+    let numToDisplay = toFixed(parseFloat(num), 7);
     // limit number to display
     if (numToDisplay.toString().length > 10) {
-        display.textContent = parseFloat(numToDisplay).toExponential(8);
+        display.textContent = numToDisplay.toExponential(8);
     }
     else {
         display.textContent = numToDisplay;
@@ -93,8 +99,13 @@ function rdyForNum2() {
 // num = number on the button
 function getNum(num) {
     if (temp.length <= maxNum) {
+        // clear temp if the first number is 0 but the rest is not
+        if (temp[0] == 0 && num != 0 && !dotUsed) {
+            temp = [];
+        }
         // preventing the user from entering multiple 0 before decimal
-        if (temp[0] != 0 || num != 0 && !dotUsed) {
+        // if (temp[0] == 0 && num == 0 && !dotUsed) {
+        if (temp[0] != 0 || num != 0 || dotUsed) {
             temp.push(num);
             let result = parseFloat(temp.join(''));
             if (negateOn) {
@@ -259,12 +270,13 @@ const backspaceBtn = document.querySelector('.backspace');
 backspaceBtn.addEventListener('click', () => {
     // check if number#1 is ready or not
     if (!num1Rdy) {
-        if (temp.pop() === '.') {
+        let popped = temp.pop();
+        if (popped === '.') {
             dotUsed = false;
         }
         num1 = parseFloat(temp.join(''));
         if (negateOn) {
-            num1 = negate(num1);
+            // num1 = negate(num1);
             showDisplay(`-${temp.join('')}`);
         }
         else {
@@ -283,7 +295,7 @@ backspaceBtn.addEventListener('click', () => {
         num2 = parseFloat(temp.join(''));
         num2Rdy = true;
         if (negateOn) {
-            num2 = negate(num2);
+            // num2 = negate(num2);
             showDisplay(`-${temp.join('')}`);
         }
         else {
