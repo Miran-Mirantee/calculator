@@ -84,8 +84,8 @@ function showDisplay(num) {
         return;
     }
     // limit number to display
-    if (numToDisplay.toString().length > 10) {
-        display.textContent = numToDisplay.toExponential(8);
+    if (numToDisplay.toString().length > 12) {
+        display.textContent = parseFloat(numToDisplay).toExponential(8);
     }
     else {
         display.textContent = numToDisplay;
