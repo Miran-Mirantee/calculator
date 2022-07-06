@@ -62,6 +62,11 @@ function operate(num1, num2, operator) {
 function showDisplay(num) {
     const display = document.querySelector('.display');
     let numToDisplay = toFixed(num, 7);
+    // incase num is a "blank" number, display nothing
+    if (num === "") {
+        display.textContent = ``;
+        return;
+    }
     // limit number to display
     if (numToDisplay.toString().length > 10) {
         display.textContent = parseFloat(numToDisplay).toExponential(8);
@@ -69,7 +74,6 @@ function showDisplay(num) {
     else {
         display.textContent = numToDisplay;
     }
-
 }
 
 // clear temp for number#2
@@ -126,7 +130,7 @@ equalBtn.addEventListener('click', () => {
 
 const negateBtn = document.querySelector('.negate');
 negateBtn.addEventListener('click', () => {
-    if (!num1Rdy && num1) {
+    if (!num1Rdy && num1 != undefined) {
         num1 = negate(num1);
         negateOn = !negateOn;
         showDisplay(num1);
@@ -145,9 +149,9 @@ negateBtn.addEventListener('click', () => {
 const addBtn = document.querySelector('.add');
 addBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as add and ready number#1
-    if (!num1Rdy && num1) {
-        rdyForNum2();
+    if (!num1Rdy && num1 != undefined) {
         operator = add;
+        rdyForNum2();
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as add
     // in case the user want to change the operator 
@@ -189,7 +193,7 @@ subtractBtn.addEventListener('click', () => {
 const multiplyBtn = document.querySelector('.multiply');
 multiplyBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as multiply and ready number#1
-    if (!num1Rdy && num1) {
+    if (!num1Rdy && num1 != undefined) {
         rdyForNum2();
         operator = multiply;
     }
@@ -211,7 +215,7 @@ multiplyBtn.addEventListener('click', () => {
 const divideBtn = document.querySelector('.divide');
 divideBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as divide and ready number#1
-    if (!num1Rdy && num1) {
+    if (!num1Rdy && num1 != undefined) {
         rdyForNum2();
         operator = divide;
     }
@@ -258,16 +262,13 @@ backspaceBtn.addEventListener('click', () => {
             showDisplay(`-${temp.join('')}`);
         }
         else {
-            if (!num1)
-                showDisplay(temp.join(''));
-            else
-                showDisplay(temp.join(''));
+            showDisplay(temp.join(''));
         }
     }
     // check if number#1 and #2 is ready and has value on num2 
     // then backspace number#2 
     // to prevent user from backspace the result
-    if (num1Rdy && num2Rdy && num2) {
+    if (num1Rdy && num2Rdy && num2 != undefined) {
         if (temp.pop() === '.') {
             dotUsed = false;
         }
@@ -279,11 +280,9 @@ backspaceBtn.addEventListener('click', () => {
         }
         else {
             if (!num2) {
-                showDisplay(temp.join(''));
                 num2Rdy = false;
             }
-            else
-                showDisplay(temp.join(''));
+            showDisplay(temp.join(''));
         }
     }
 });
