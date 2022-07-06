@@ -257,7 +257,10 @@ dotBtn.addEventListener('click', () => {
     if (!dotUsed && temp.length <= maxNum) {
         temp.push(dotBtn.textContent);
         dotUsed = true;
-        showDisplay(temp.join(''));
+        if (negateOn)
+            showDisplay(`-${temp.join('')}`);
+        else
+            showDisplay(temp.join(''));
     }
 });
 
