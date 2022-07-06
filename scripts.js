@@ -128,6 +128,7 @@ equalBtn.addEventListener('click', () => {
     if (num1Rdy && num2Rdy) {
         num1 = operate(num1, num2, operator);
         negateOn = false;
+        dotUsed = false;
     }
     else
         console.log(`enter num2 first`)
@@ -273,7 +274,9 @@ backspaceBtn.addEventListener('click', () => {
     // check if number#1 and #2 is ready and has value on num2 
     // then backspace number#2 
     // to prevent user from backspace the result
-    if (num1Rdy && num2Rdy && num2 != undefined) {
+
+    // if (num1Rdy && num2Rdy && num2 != undefined) { in case things broke
+    if (num1Rdy && temp.length > 0) {
         if (temp.pop() === '.') {
             dotUsed = false;
         }
