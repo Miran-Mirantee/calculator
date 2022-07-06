@@ -31,7 +31,8 @@ function divide(num1, num2) {
 // reset the calculator
 function reset() {
     const preActivate = document.querySelector('.activate');
-    preActivate.classList.remove('activate');
+    if (preActivate)
+        preActivate.classList.remove('activate');
     num1 = undefined;
     num2 = undefined;
     num1Rdy = false;
