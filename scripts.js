@@ -126,9 +126,9 @@ const equalBtn = document.querySelector('.equal');
 equalBtn.addEventListener('click', () => {
     // check if the number#1 and number#2 is ready to calculate then calculate
     if (num1Rdy && num2Rdy) {
-        num1 = operate(num1, num2, operator);
         negateOn = false;
         dotUsed = false;
+        num1 = operate(num1, num2, operator);
     }
     else
         console.log(`enter num2 first`)
