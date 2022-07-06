@@ -61,8 +61,13 @@ function operate(num1, num2, operator) {
 // num = text to display (usually it's for number)
 function showDisplay(num) {
     const display = document.querySelector('.display');
+    // in case there is dot in num, display dot
+    if (dotUsed) {
+        display.textContent = num;
+        return;
+    }
     let numToDisplay = toFixed(num, 7);
-    // incase num is a "blank" number, display nothing
+    // in case num is a "blank" number, display nothing
     if (num === "") {
         display.textContent = ``;
         return;
@@ -150,8 +155,8 @@ const addBtn = document.querySelector('.add');
 addBtn.addEventListener('click', () => {
     // check if number#1 is not ready then assign operator as add and ready number#1
     if (!num1Rdy && num1 != undefined) {
-        operator = add;
         rdyForNum2();
+        operator = add;
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as add
     // in case the user want to change the operator 
@@ -238,9 +243,9 @@ const dotBtn = document.querySelector('.dot');
 dotBtn.addEventListener('click', () => {
     if (!dotUsed && temp.length <= maxNum) {
         temp.push(dotBtn.textContent);
+        dotUsed = true;
         showDisplay(temp.join(''));
     }
-    dotUsed = true;
 });
 
 const clearBtn = document.querySelector('.clear');
