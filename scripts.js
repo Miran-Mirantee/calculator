@@ -30,6 +30,8 @@ function divide(num1, num2) {
 
 // reset the calculator
 function reset() {
+    const preActivate = document.querySelector('.activate');
+    preActivate.classList.remove('activate');
     num1 = undefined;
     num2 = undefined;
     num1Rdy = false;
@@ -142,6 +144,13 @@ function toFixed(value, precision) {
     return String(Math.round(value * power) / power);
 }
 
+function activate(btn) {
+    const preActivate = document.querySelector('.activate');
+    if (preActivate)
+        preActivate.classList.remove('activate');
+    btn.classList.add('activate');
+}
+
 const equalBtn = document.querySelector('.equal');
 equalBtn.addEventListener('click', () => {
     // check if the number#1 and number#2 is ready to calculate then calculate
@@ -149,6 +158,9 @@ equalBtn.addEventListener('click', () => {
         negateOn = false;
         dotUsed = false;
         num1 = operate(num1, num2, operator);
+
+        const preActivate = document.querySelector('.activate');
+        preActivate.classList.remove('activate');
     }
     else
         console.log(`enter num2 first`)
@@ -179,12 +191,14 @@ addBtn.addEventListener('click', () => {
     if (!num1Rdy && num1 != undefined) {
         rdyForNum2();
         operator = add;
+        activate(addBtn);
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as add
     // in case the user want to change the operator 
     else if (num1Rdy && !num2Rdy) {
         operator = add;
         dotUsed = false;
+        activate(addBtn);
     }
     // check if the number#1 and number#2 is ready to calculate then calculate using 
     // the previous operator and assign new operator as add
@@ -192,6 +206,7 @@ addBtn.addEventListener('click', () => {
         num1 = operate(num1, num2, operator);
         operator = add;
         dotUsed = false;
+        activate(addBtn);
     }
 }); 
 
@@ -201,12 +216,14 @@ subtractBtn.addEventListener('click', () => {
     if (!num1Rdy && num1) {
         rdyForNum2();
         operator = subtract;
+        activate(subtractBtn);
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as subtract
     // in case the user want to change the operator 
     else if (num1Rdy && !num2Rdy) {
         operator = subtract;
         dotUsed = false;
+        activate(subtractBtn);
     }
     // check if the number#1 and number#2 is ready to calculate then calculate using 
     // the previous operator and assign new operator as subtract
@@ -214,6 +231,7 @@ subtractBtn.addEventListener('click', () => {
         num1 = operate(num1, num2, operator);
         operator = subtract;
         dotUsed = false;
+        activate(subtractBtn);
     }
 });
 
@@ -223,12 +241,14 @@ multiplyBtn.addEventListener('click', () => {
     if (!num1Rdy && num1 != undefined) {
         rdyForNum2();
         operator = multiply;
+        activate(multiplyBtn);
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as multiply
     // in case the user want to change the operator 
     else if (num1Rdy && !num2Rdy) {
         operator = multiply;
         dotUsed = false;
+        activate(multiplyBtn);
     }
     // check if the number#1 and number#2 is ready to calculate then calculate using 
     // the previous operator and assign new operator as multiply
@@ -236,6 +256,7 @@ multiplyBtn.addEventListener('click', () => {
         num1 = operate(num1, num2, operator);
         operator = multiply;
         dotUsed = false;
+        activate(multiplyBtn);
     }
 });
 
@@ -245,12 +266,14 @@ divideBtn.addEventListener('click', () => {
     if (!num1Rdy && num1 != undefined) {
         rdyForNum2();
         operator = divide;
+        activate(divideBtn);
     }
     // check if the number#1 but number#2 is NOT ready then assign operator as divide
     // in case the user want to change the operator 
     else if (num1Rdy && !num2Rdy) {
         operator = divide;
         dotUsed = false;
+        activate(divideBtn);
     }
     // check if the number#1 and number#2 is ready to calculate then calculate using 
     // the previous operator and assign new operator as divide
@@ -258,6 +281,7 @@ divideBtn.addEventListener('click', () => {
         num1 = operate(num1, num2, operator);
         operator = divide;
         dotUsed = false;
+        activate(divideBtn);
     }
 });
 
