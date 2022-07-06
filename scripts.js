@@ -6,6 +6,7 @@ let num2Rdy = false;
 let negateOn = false;
 let dotUsed = false;
 let operator;
+let maxNum = 13; //14
 
 function negate(num) {
     return num * -1;
@@ -50,7 +51,8 @@ function operate(num1, num2, operator) {
     }
     temp = [];
     let result = operator(num1, num2);
-    showDisplay(toFixed(result, 8));
+    showDisplay(result);
+
     num2Rdy = false;
     return result;
 }
@@ -59,7 +61,15 @@ function operate(num1, num2, operator) {
 // num = text to display (usually it's for number)
 function showDisplay(num) {
     const display = document.querySelector('.display');
-    display.textContent = num;
+    let numToDisplay = toFixed(num, 7);
+    // limit number to display
+    if (numToDisplay.toString().length > 10) {
+        display.textContent = parseFloat(numToDisplay).toExponential(8);
+    }
+    else {
+        display.textContent = numToDisplay;
+    }
+
 }
 
 // clear temp for number#2
@@ -73,7 +83,7 @@ function rdyForNum2() {
 // Get number from buttons
 // num = number on the button
 function getNum(num) {
-    if (temp.length <= 15) {
+    if (temp.length <= maxNum) {
         // preventing the user from entering multiple 0 before decimal
         if (temp[0] != 0 || num != 0 && !dotUsed) {
             temp.push(num);
@@ -222,7 +232,7 @@ divideBtn.addEventListener('click', () => {
 
 const dotBtn = document.querySelector('.dot');
 dotBtn.addEventListener('click', () => {
-    if (!dotUsed && temp.length <= 15) {
+    if (!dotUsed && temp.length <= maxNum) {
         temp.push(dotBtn.textContent);
         showDisplay(temp.join(''));
     }
