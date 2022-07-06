@@ -47,6 +47,7 @@ function operate(num1, num2, operator) {
     if (num2 === 0 && operator == divide) {
         num1Rdy = false;
         num2Rdy = false;
+        temp = [];
         return showDisplay(`NO`);
     }
     temp = [];
@@ -61,6 +62,11 @@ function operate(num1, num2, operator) {
 // num = text to display (usually it's for number)
 function showDisplay(num) {
     const display = document.querySelector('.display');
+    let numToDisplay = toFixed(parseFloat(num), 7);
+    if (numToDisplay === 'NaN') {
+        display.textContent = num;
+        return
+    }
     // in case there is dot in num, display dot
     if (dotUsed) {
         display.textContent = num;
@@ -77,7 +83,6 @@ function showDisplay(num) {
         display.textContent = ``;
         return;
     }
-    let numToDisplay = toFixed(parseFloat(num), 7);
     // limit number to display
     if (numToDisplay.toString().length > 10) {
         display.textContent = numToDisplay.toExponential(8);
@@ -115,6 +120,10 @@ function getNum(num) {
             else {
                 showDisplay(temp.join(''));
             }
+            return result;
+        }
+        else {
+            let result = parseFloat(temp.join(''));
             return result;
         }
     }
@@ -287,11 +296,9 @@ backspaceBtn.addEventListener('click', () => {
             showDisplay(temp.join(''));
         }
     }
-    // check if number#1 and #2 is ready and has value on num2 
+    // check if number#1 and length of temp is more than 0
     // then backspace number#2 
     // to prevent user from backspace the result
-
-    // if (num1Rdy && num2Rdy && num2 != undefined) { in case things broke
     if (num1Rdy && temp.length > 0) {
         if (temp.pop() === '.') {
             dotUsed = false;
