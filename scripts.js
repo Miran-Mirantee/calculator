@@ -150,17 +150,18 @@ negateBtn.addEventListener('click', () => {
     if (!num1Rdy && num1 != undefined) {
         num1 = negate(num1);
         negateOn = !negateOn;
-        showDisplay(num1);
     }
     else if (num1Rdy && !num2Rdy) {
         num1 = negate(num1);
-        showDisplay(num1);
     }
     else if (num1Rdy && num2Rdy) {
         num2 = negate(num2);
         negateOn = !negateOn;
-        showDisplay(num2);
     }
+    if (negateOn)
+        showDisplay(`-${temp.join('')}`);
+    else
+        showDisplay(temp.join(''));
 });
 
 const addBtn = document.querySelector('.add');
